@@ -1,5 +1,6 @@
 {
   "esversion": 6,
+  "predef":["readFile"],
   "undef": true,
   "unused": true,
   "node": true,
