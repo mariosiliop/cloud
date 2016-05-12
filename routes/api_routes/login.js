@@ -8,18 +8,29 @@ var login = {
 
    check_request: (req, res, next) => co(function*(){
 
-      var email = 'mariosiliop92@gmail.com';
-      var password = '123456';
+      console.log(req.body.email);
+      console.log(req.query.email);
+      var email = req.query.email;
+      var password = req.query.password;
 
       var users = global.connection.collection('users');
 
-      var result = yield users.find({email: email}).toArray();
+      try{
 
-      var correct_password =
-         yield new Promise(resolve => bcrypt.compare(password, result[0].password, (error, result) => resolve(result)));
+         var result = yield users.find({email: email}).toArray();
 
-      if(correct_password) { req.accept_user = true; req.uid = result[0].uid; }
-      else res.end();
+         if(result[0]){
+            var correct_password =
+               yield new Promise(resolve => bcrypt.compare(password, result[0].password, (error, result) => resolve(result)));
+
+            if(correct_password) { req.accept_user = true; req.uid = result[0].uid; }
+            else res.end('Not valid password!');
+         }
+
+      } catch(error){
+         console.log(error);
+         res.end(error);
+      }
 
       next();
 

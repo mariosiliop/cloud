@@ -11,9 +11,9 @@ var register = {
 
       console.log('geia');
 
-      var username = 'marios';
-      var password = '123456';
-      var email = 'mariosiliop92@gmail.com';
+      var username = req.query.username;
+      var password = req.query.password;
+      var email = req.query.email;
 
       req.valid_values = "false";
 
@@ -29,8 +29,9 @@ var register = {
   unique: (req, res, next) => co(function*(){
      console.log('hello');
      var users = global.connection.collection('users');
+     var email = req.query.email;
 
-     var user_exist = yield users.find({email: 'mariosiliop92@gmail.com'}).toArray();
+     var user_exist = yield users.find({email: email}).toArray();
 
      if (user_exist[0]) req._exist = 'true';
      else req._exist = 'false';
@@ -46,9 +47,9 @@ var register = {
 
      if (req.valid_values === 'true' && req._exist === 'false') {
 
-        var username = 'marios';
-        var pass = '123456';
-        var email = 'mariosiliop92@gmail.com';
+        var username = req.query.username;
+        var pass = req.query.password;
+        var email = req.query.email;
 
         var users = global.connection.collection('users');
 

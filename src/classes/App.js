@@ -13,7 +13,10 @@ const uuid = require('node-uuid');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({
-    dest: './'
+    dest: './',
+    limits: {
+      fileSize: 1000000000
+    }
 });
 
 var dbconn;
@@ -21,6 +24,7 @@ var dbconn;
 module.exports = class App {
 
    constructor(PORT){
+
       console.log(PORT + " app");
 
       mongodb.connect('mongodb://marios/cloud', function(err, dbc){
@@ -31,21 +35,23 @@ module.exports = class App {
 
 		var expressApp = express();
 
-		expressApp.use(bodyParser.urlencoded({ extended: true }))
+		expressApp.use(this.check_request)
+                .use(bodyParser.urlencoded({ extended: true }))
                 .use(cookieParser());
 
       var server = http.createServer(expressApp);
 
-      var auth = require('../../routes/authentication.js');
-      var reg = require('../../routes/register');
-      var pages = require('../../routes/pages.js');
-      var login = require('../../routes/login.js');
-      var logout = require('../../routes/logout.js');
+      var auth = require('../../routes/api_routes/authentication.js');
+      var reg = require('../../routes/api_routes/register');
+      var pages = require('../../routes/api_routes/pages.js');
+      var login = require('../../routes/api_routes/login.js');
+      var logout = require('../../routes/api_routes/logout.js');
+      var storage = require('../../routes/api_routes/storage.js');
 
       expressApp.get('/api/register', [reg.check_request, reg.unique, reg.entry]);
       expressApp.get('/api/login', [login.check_request, login.session_token]);
       expressApp.get('/api/logout', [auth.valid_cookie, logout]);
-      expressApp.post('/add', upload.single('photo'), this.other.bind(this));
+      expressApp.post('/add', upload.single('photo'), [auth.valid_cookie, storage.selectStoreDB, storage.send]);
 
       expressApp.get('/', [pages.send] );
 
@@ -53,39 +59,12 @@ module.exports = class App {
 
 		server.listen(PORT, '10.240.0.4');
 
-
    }
 
-   other(req, res) {
+   check_request(req, res, next) {
 
-      var filename = req.file.filename;
-
-         co(function*(){
-
-            var file = fs.createReadStream('./' + filename);
-
-             var request = http.request({
-                 method: 'post',
-                 host: '10.240.0.4',
-                 port: 8090,
-                 path: '/add',
-
-             }, function(res){
-                 res.on('data', c => console.log(c.toString('utf8')));
-                 res.on('end', () => {
-                     console.log('response end.');
-                 });
-             });
-
-             file.pipe(request);
-             file.on('end', () => {
-                 console.log('file sent.');
-                 request.end();
-             });
-
-         yield res.end('done');
-
-      });
+      console.log(req.path);
+      next();
    }
 
 };

@@ -14,7 +14,7 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({ dest: './' });
 
-var dbconn;
+var dbconn , _PORT;
 
 module.exports = class Storage {
 
@@ -28,6 +28,8 @@ module.exports = class Storage {
 
 		});
 
+      global.path = `storage${PORT}`;
+      
 		var expressApp = express();
 
 		expressApp.use(bodyParser.urlencoded({ extended: true }))
@@ -35,32 +37,15 @@ module.exports = class Storage {
 
       var server = http.createServer(expressApp);
 
-      // API calls
+      var write = require('../../routes/store_routes/write.js');
 
-      expressApp.post('/add', this.done);
+      // API calls
+      expressApp.post('/add/:filename', [write.toDisk ]);
 
 
 		expressApp.use(express.static('./cloud/assets'));
 
 		server.listen(PORT, '10.240.0.4');
-
-   }
-
-   done(req, res) {
-
-      var writeStream = fs.createWriteStream('img.jpg');
-
-      req.on('data', c => writeStream.write(c));
-      req.on('end', () => {
-          res.write('1');
-          res.end('200');
-          console.log('file saved.');
-      });
-
-      console.log('irthame kai edw palikari mou! ');
-      console.log(req.file);
-
-      res.end('comple');
 
    }
 
