@@ -23,6 +23,7 @@ var storage = {
              response.on('data', c => console.log(c.toString('utf8')));
              response.on('end', () => {
                console.log('response end.');
+               fs.unlink('./' + filename);
              });
           });
 
@@ -46,7 +47,7 @@ var storage = {
 
          var minSize = yield dbs.find().sort({size: 1}).limit(1).toArray();
 
-         console.log(minSize[0]);
+         console.log('DB on port : ' + minSize[0].port + '.');
          req._PORT = minSize[0].port;
 
          var size = minSize[0].size + req.file.size;
@@ -61,23 +62,22 @@ var storage = {
          var cookie = 'b2d566f0-0e3e-11e6-8bcf-b709da0e457a';
          var user =  yield cookies.find({cookie: cookie}).toArray();
 
-
-         console.log(user[0]);
-
          if(user[0]){
-
             try{
-            var data = global.connection.collection('userdata');
+               var data = global.connection.collection('userdata');
 
-            data.insert({
-               uid: user[0].uid,
-               file: req.file.filename,
-               port: req._PORT
-            });
-         } catch (err) {
-            console.log(err); 
-         }
+               console.log(req.file);
 
+               data.insert({
+                  uid: user[0].uid,
+                  file: req.file.filename,
+                  original_name: req.file.originalname,
+                  port: req._PORT,
+                  parent: "0"
+               });
+            } catch (err) {
+               console.log(err);
+            }
          }
 
       }
