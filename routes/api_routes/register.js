@@ -9,9 +9,7 @@ var register = {
 
    check_request: (req, res, next) => {
 
-      console.log('geia');
-
-      var username = req.query.username;
+      var username = req.query.fullname;
       var password = req.query.password;
       var email = req.query.email;
 
@@ -27,7 +25,7 @@ var register = {
   },
 
   unique: (req, res, next) => co(function*(){
-     console.log('hello');
+
      var users = global.connection.collection('users');
      var email = req.query.email;
 
@@ -41,9 +39,11 @@ var register = {
  }),
 
   entry: (req, res, next) => co(function*(){
-     console.log('bb');
+
 
      var data;
+
+     console.log(req.valid_values + ' ' + req._exist );
 
      if (req.valid_values === 'true' && req._exist === 'false') {
 

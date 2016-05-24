@@ -58,7 +58,7 @@ module.exports = class App {
 
       expressApp.get('/', [pages.send] );
 
-		expressApp.use(express.static('./cloud/assets'));
+		expressApp.use(express.static('./assets'));
 
 		server.listen(PORT, '10.240.0.4');
 

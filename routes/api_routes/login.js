@@ -8,8 +8,8 @@ var login = {
 
    check_request: (req, res, next) => co(function*(){
 
-      console.log(req.body.email);
       console.log(req.query.email);
+      console.log(req.query.password);
       var email = req.query.email;
       var password = req.query.password;
 
@@ -24,7 +24,7 @@ var login = {
                yield new Promise(resolve => bcrypt.compare(password, result[0].password, (error, result) => resolve(result)));
 
             if(correct_password) { req.accept_user = true; req.uid = result[0].uid; }
-            else res.end('Not valid password!');
+            else res.send('Not valid password!');
          }
 
       } catch(error){
