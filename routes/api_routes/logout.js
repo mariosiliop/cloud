@@ -3,7 +3,7 @@
 const co = require('co');
 
 
-var logout = (req, res, next) => co(function*(){
+var logout = (req, res) => co(function*(){
 
    if(req._cookie) {
 
@@ -14,8 +14,6 @@ var logout = (req, res, next) => co(function*(){
       res.send('logouted..');
 
    }
-
-   next();
 
 });
 

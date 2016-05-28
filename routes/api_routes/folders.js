@@ -47,7 +47,9 @@ var folder = {
       var udata = yield data.find({parent: "0"}).toArray();
 
       var r = ufolders.concat(udata);
-      console.log(r);
+
+      for(let x of r)
+      console.log(x);
 
       //var asd = _.extend(ufolders, udata);
 

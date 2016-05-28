@@ -4,14 +4,17 @@ const bcrypt = require('bcrypt');
 const co = require('co');
 const validator = require('validator');
 const uuid = require('node-uuid');
+const fs = require('mz/fs')
 
 var register = {
 
    check_request: (req, res, next) => {
 
-      var username = req.query.fullname;
-      var password = req.query.password;
-      var email = req.query.email;
+      console.log(req.body);
+
+      var username = req.body.username;
+      var password = req.body.password;
+      var email = req.body.email;
 
       req.valid_values = "false";
 
@@ -27,7 +30,7 @@ var register = {
   unique: (req, res, next) => co(function*(){
 
      var users = global.connection.collection('users');
-     var email = req.query.email;
+     var email = req.body.email;
 
      var user_exist = yield users.find({email: email}).toArray();
 
@@ -38,18 +41,17 @@ var register = {
 
  }),
 
-  entry: (req, res, next) => co(function*(){
+  entry: (req, res) => co(function*(){
 
+     var data = [{}];
 
-     var data;
-
-     console.log(req.valid_values + ' ' + req._exist );
 
      if (req.valid_values === 'true' && req._exist === 'false') {
 
-        var username = req.query.username;
-        var pass = req.query.password;
-        var email = req.query.email;
+        console.log('teleiwsame..');
+        var username = req.body.username;
+        var pass = req.body.password;
+        var email = req.body.email;
 
         var users = global.connection.collection('users');
 
@@ -67,12 +69,15 @@ var register = {
         data = {success: true};
 
      } else {
-        data = {success: false};
+        console.log(req.valid_values + ' ' + req._exist);
+        data[0] = {success: false};
+        data[1] = { message:'No valid data' };
+        console.log(data + ' DATA');
+
      }
 
-     console.log(data);
+
      res.send(data);
-     next();
 
   })
 

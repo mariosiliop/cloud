@@ -36,7 +36,7 @@ var login = {
 
    }),
 
-   session_token: (req, res, next) => co(function*(){
+   session_token: (req, res) => co(function*(){
 
       if(req.accept_user){
 
@@ -57,7 +57,6 @@ var login = {
 
       }
       else res.send({success: false});
-      next();
 
    })
 

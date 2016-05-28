@@ -1,16 +1,23 @@
 'use strict';
 
-const fs = require('mz/fs');
+const fs = require('fs');
 const co = require('co');
 
 var pages = {
 
-   send: (req, res, next) => co(function*(){
-      res.end((yield fs.readFile('./assets/index.html')).toString('utf8'));
+   send: (req, res) => {
 
-      next();
+      console.log(req.params.pages);
 
-   })
+      if(req.params.pages){
+            res.end(fs.readFileSync('./assets/'+req.params.pages+'.html').toString('utf8'));
+      }
+      else {
+         console.log('mpainw edw mesa');
+         res.end(fs.readFileSync('./assets/index.html').toString('utf8'));
+      }
+
+   }
 
 };
 
