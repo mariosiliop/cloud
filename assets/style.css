@@ -1,0 +1,101 @@
+.header{
+    width: 100%;
+	margin: 0 0 10px;
+    padding-bottom: 9px;
+	border-bottom: 1px solid #eee;
+}
+
+.sidebar {	
+	float:left;	
+	width:250px;
+	height:100%;
+	background:#c1daf9;
+}
+
+.login_form {
+	width: 350px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 80px;
+}
+
+.register_form {
+	width: 350px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 180px;
+	margin-left: 150px;
+}
+
+.button{
+	font-size: 13pt;
+	height: 40px;
+	border-radius: 8px;
+}
+
+.button-small{
+	width: 80px;
+}
+
+.button-big{
+	width: 100%;
+}
+
+.primary{
+	color: white;
+	background-color: #157efb;
+	border: 2px solid #157efb;
+}
+
+.secondary{
+	background-color: #bfc9d5;
+	border: 2px solid #bfc9d5;
+}
+
+.message{
+	font-size: 22px;
+	position: relative;
+	top: 40px;
+}
+
+#img_cloud1{
+	width: 100%; 
+	max-width: 100px;
+}
+
+#img_cloud2{
+	width: 100%; 
+	max-width: 60px;
+}
+
+
+#name{
+	font-weight: bold;
+	font-size: 20pt;
+}
+
+#field{
+	font-size:12pt;
+	width:100%; 
+	height:40px; 
+	padding: 10px;
+	border: 1px solid #848484; 
+	-webkit-border-radius: 30px; 
+    -moz-border-radius: 30px; 
+	border-radius: 8px; 
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+}
+
+
+    
+    

@@ -8,10 +8,10 @@ var login = {
 
    check_request: (req, res, next) => co(function*(){
 
-      console.log(req.query.email);
-      console.log(req.query.password);
-      var email = req.query.email;
-      var password = req.query.password;
+      console.log(req.body.email);
+      console.log(req.body.password);
+      var email = req.body.email;
+      var password = req.body.password;
 
       var users = global.connection.collection('users');
 

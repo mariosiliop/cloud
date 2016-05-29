@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sign Up to Cloudy</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+	<link type="javascript" href="js/bootstrap.js" />
+	<link type="javascript" href="js/bootstrap.min.js" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="icon" href="cloud.ico" type="image/xico">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script language="javascript"> 
+		function register(){
+		}
+		
+		function test(){
+			$.ajax({
+					$('.header').html('');						
+					$('.register_form').html('');
+						
+					$('.login_form').find.('.intro').find('.cloudy').html('<img id="img_cloud1" style="vertical-align:text-bottom" src="cloudy.jpg" alt="Cloud"><span style="font-size:36pt;">Cloudy</span><br>');
+					$('.login_form').find.('.intro').find('.sequence').html('<span style="font-size:20pt;">with a chance of big data</span>');
+				});
+		}
+	</script>
+</head>
+<body onload="test()">
+	<div class="header">
+		<br><img style="margin-left:20px; vertical-align:text-bottom;" id="img_cloud2" src="cloudy.jpg" alt="Cloud"><span style="font-size:24pt;";>Cloudy</span>
+		<a href="index.html"><button type="submit" class="button button-small secondary" style="margin-left:1000px;" name="Login" value="Login">Log In</button></a>
+	</div>
+	<div class="register_form">
+		<p align="left"><span style="font-size:20pt;">Sign up. It's free!</span></p>
+		<form name="registerForm">
+			<p><input id="field" type="text" name="username" placeholder="Enter your full name"></p>
+			<p><input id="field" type="email" name="email" placeholder="Enter your e-mail address"></p>
+			<p><input id="field" type="password" name="password" placeholder="Create your password"></p><br>
+		</form>
+		<button type="submit" class="button button-big primary" name="register" value="register" onclick="register()">Sign Up</button>
+	</div>
+	<div class="message"></div>
+	
+	<div class="login_form">
+		<div align="center" class="intro">
+		<div class="cloudy"></div>
+		<div class="sequence"></div><br>
+		</div>
+		
+	</div>
+</body>
+<html>

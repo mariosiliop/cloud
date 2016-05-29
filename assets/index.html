@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cloudy</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+	<link type="javascript" href="/js/bootstrap.js" />
+	<link type="javascript" href="/js/bootstrap.min.js" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="icon" href="cloud.ico" type="image/xico">
+	<script>
+		function login(){
+			var email = document.loginform.email.value;
+			var password = document.loginform.password.value;
+			var email_length=email.length;
+			var password_length=password.length;
+			if(email_length == 0 || password_length == 0){
+				alert("You must fill all the fields in order to log in");
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="login_form">
+
+		<div align="center" class="intro">
+
+			<div class="cloudy">
+				<img id="img_cloud1" style="vertical-align:text-bottom" src="cloudy.jpg" alt="Cloud">
+				<span style="font-size:36pt;">Cloudy</span>
+				<br>
+			</div>
+
+			<div class="sequence">
+				<span style="font-size:20pt;">with a chance of big data</span>
+			</div>
+			<br>
+
+		</div>
+
+		<form method="post" name="loginForm" action="/api/login">
+
+			<p><input id="field" type="email" name="email" placeholder="Enter your e-mail address"><br><br>
+			<input id="field" type="password" name="password" placeholder="Enter your password"></p>
+			<br>
+			<button type="submit" class="button button-big primary" name="Login" value="Login" onclick="login()">Log In</button>
+
+		</form>
+		<br>
+		<p align="center"><span style="font-size:14pt;">Not a member?</span></p>
+		<form method="post" name="loginform" action="/register">
+			<button type="submit" class="button button-big secondary" style="width: 100%;" name="SignUp" value="SignUp">Sign Up</button>
+		</form>
+	</div>
+	<!--<span class="glyphicon glyphicon glyphicon-cloud" aria-hidden="true"></span>-->
+</body>
+</html>
