@@ -7,10 +7,10 @@ var pages = {
 
    send: (req, res) => {
 
-      console.log(req.params.pages);
+      console.log(req.params.pages + ' PAGES');
 
       if(req.params.pages){
-            res.end(fs.readFileSync('./assets/'+req.params.pages+'.html').toString('utf8'));
+            res.send(fs.readFileSync('./assets/'+req.params.pages+'.html').toString('utf8'));
       }
       else {
          console.log('mpainw edw mesa');

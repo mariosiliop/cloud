@@ -55,6 +55,7 @@ module.exports = class App {
       expressApp.post('/add', upload.single('photo'), [auth.valid_cookie, storage.selectStoreDB, storage.send]);
       expressApp.post('/api/add/folder', [auth.valid_cookie, folders.new_folder]);
       expressApp.post('/api/find/folders', [auth.valid_cookie, folders.send_documents]);
+      expressApp.post('/api/back/folders', [auth.valid_cookie, folders.back_documents]);
 
       expressApp.post('/:pages', [pages.send] );
 

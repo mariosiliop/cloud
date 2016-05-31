@@ -48,14 +48,7 @@ function login(){
 				success: (data)=>{
 					if(data[0].success){
 						//main();
-						$.ajax({
-							url: '/main',
-							datatype: 'Json',
-							method: 'post',
-							success: (data)=>{
-								window.location.href = data;
-							}
-						});
+						window.location.href = 'main.html';
 					}else{
 						$('.message').remove();
 						var message = $('<div>').html('');
@@ -269,9 +262,9 @@ function main(){
 	$(header).append(button);
 
 	$('body').append(header);
-	$(document).ready(()=>{data()});
+	$(document).ready(()=>{check('0')});
 }
-
+/*
 function data(){
 	console.log("data");
 	$.ajax({
@@ -287,4 +280,4 @@ function data(){
 			}
 		}
 	});
-}
+}*/

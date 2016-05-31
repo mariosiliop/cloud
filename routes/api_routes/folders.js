@@ -37,23 +37,43 @@ var folder = {
 
    send_documents: (req, res) => co(function*(){
 
+      console.log(req.body );
       var folders = global.connection.collection('folders');
 
-      var ufolders = yield folders.find({parent: "0"}).toArray();
+      var ufolders = yield folders.find({parent: req.body.fid}).toArray();
 
 
       var data = global.connection.collection('userdata');
 
-      var udata = yield data.find({parent: "0"}).toArray();
+      var udata = yield data.find({parent: req.body.fid}).toArray();
 
       var r = ufolders.concat(udata);
 
-      for(let x of r)
-      console.log(x);
-
-      //var asd = _.extend(ufolders, udata);
+      if(!r[0])
+      res.send([{message: 'Empty folder'}]);
 
       res.send(JSON.stringify(r));
+   }),
+
+   back_documents: (req, res) => co(function*(){
+
+      console.log(req.body );
+      var folders = global.connection.collection('folders');
+
+      var ufolders = yield folders.find({fid: req.body.fid}).toArray();
+      console.log(ufolders[0]);
+
+      var data = global.connection.collection('userdata');
+
+      var udata = yield data.find({parent: ufolders[0].parent}).toArray();
+
+      var r = ufolders.concat(udata);
+      console.log(r);
+      if(!r[0])
+      res.send([{message: 'Empty folder'}]);
+
+      res.send(JSON.stringify(r));
+
    })
 
 
