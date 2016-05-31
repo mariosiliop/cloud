@@ -38,6 +38,9 @@ var login = {
 
    session_token: (req, res) => co(function*(){
 
+
+      var data = [{}];
+
       if(req.accept_user){
 
          var cookies = global.connection.collection('cookies');
@@ -53,10 +56,17 @@ var login = {
             httpOnly: true
    		});
 
-         res.send({success: true});
+         data[0] = {success: true};
+         res.send(data);
 
+      } else {
+
+         console.log('geiaa');
+         data[0] = {success: false};
+         data[1] = {message: "No valid data"};
+         console.log(data);
+         res.send(data);
       }
-      else res.send({success: false});
 
    })
 

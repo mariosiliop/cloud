@@ -11,37 +11,11 @@
 	<link type="javascript" href="/js/bootstrap.min.js" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="icon" href="cloud.ico" type="image/xico">
+	<script src="index.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script language="javascript">
-		function test(){
-			$.ajax({
-					url: '/api/find/folders',
-					method: 'post',
-					data: { username: username, email: email, password: password},
-					dataType: 'Json',
-					success: (data)=>{
-						for(let x in data){
-							console.log(x.original_name);
-						}
-					}
-				});
-		}
-	</script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
-<body onload="test()">
-	<div class="header">
-		<br><img id="img_cloud2" style="margin-left:20px;vertical-align:text-bottom;" src="cloudy.jpg" alt="Cloud"><span style="font-size:24pt;">Cloudy</span>
-		<a href="logout.html"><button type="submit" class="button button-small primary" style="margin-left:1000px;" name="Logout" value="Logout">Log Out</button></a>
-	</div>
-	<div class="sidebar">
-		<div class="list-group">
-		  <button type="button" class="list-group-item">Cras justo odio</button>
-		  <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
-		  <button type="button" class="list-group-item">Morbi leo risus</button>
-		  <button type="button" class="list-group-item">Porta ac consectetur ac</button>
-		  <button type="button" class="list-group-item">Vestibulum at eros</button>
-		</div>
-	</div>=
+<body onload="loadLogin('empty')">
+	<!--<span class="glyphicon glyphicon glyphicon-cloud" aria-hidden="true"></span>-->
 </body>
-<html>
+</html>

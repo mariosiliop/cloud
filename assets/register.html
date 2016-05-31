@@ -11,132 +11,21 @@
 	<link type="javascript" href="js/bootstrap.min.js" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="icon" href="cloud.ico" type="image/xico">
+	<script src="index.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script language="javascript">
-		function register(){
-			var username = document.registerForm.username.value;
-			var email = document.registerForm.email.value;
-			var password = document.registerForm.password.value;
-			var username_length=username.length;
-			var email_length=email.length;
-			var password_length=password.length;
-			if(username_length == 0 || email_length == 0 || password_length == 0){
-				alert("You must fill all the fields in order to sign up");
-			}else{
-				$.ajax({
-					url: '/api/register',
-					method: 'post',
-					data: { username: username, email: email, password: password},
-					dataType: 'Json',
-					success: (data)=>{
-						if(data[0].success){
-							alert("Registration successful. You will be redirected to the Login page.");
-						}else{
-						//var element = $('<div>').html(data[1].message);
-							//element.addClass("message");
-							//$('body').append(element);
-
-							$('.message').html('');
-							$('.message').html(data[1].message);
-							$('.header').html('');
-							$('.register_form').html('');
-
-							var intro = $('<div>').attr('align','center').addClass('intro');
-							var cloudy = $('<div>').addClass('cloudy');
-							var sequence = $('<div>').addClass('sequence');
-
-							$('.login_form').append(intro);
-							$(intro).append(cloudy);
-							$(intro).append(sequence);
-							$(intro).append($('<br />'));
-
-							var img = $('<img>').attr({
-													'src' : 'cloudy.jpg',
-													'id' : 'img_cloud1'
-												})
-												.css('vertical-align','text-bottom');
-							var span = $('<span>').css('font-size', '36pt').html('Cloudy');
-							$(cloudy).append(img);
-							$(cloudy).append(span);
-
-							span = $('<span>').css('font-size', '20pt').html('with a chance of big data');
-							$(sequence).append(span);
-
-							var form = $('<form>').attr({
-													'method': 'post',
-													'name':'loginForm',
-													'action' : '/api/login'
-													});
-							$('.login_form').append(form);
-
-							var p = $('<p>');
-							var input = $('<input>').attr({
-													'id' : 'field',
-													'type' : 'email',
-													'name' : 'email',
-													'placeholder' : 'Enter your e-mail address'
-												});
-							$(p).append(input);
-							$(p).append($('<br />'));
-							$(p).append($('<br />'));
-							input = $('<input>').attr({
-													'id' : 'field',
-													'type' : 'password',
-													'name' : 'password',
-													'placeholder' : 'Enter your password'
-												});
-							$(p).append(input);
-							$(form).append(p);
-							$(form).append($('<br />'));
-
-							var button = $('<button>').css('width', '100%').attr({
-														'class' : 'button button-big primary',
-														'type' : 'submit',
-														'name' : 'Login',
-														'value' : 'Login',
-														'onclick' : 'login()'
-													}).html('Log In');
-							$(form).append(button);
-							$('.login_form').append(form);
-							$('.login_form').append(br);
-							//p = $('<p>')
-							button = $('<button>').css('width', '100%').attr({
-														'class' : 'button button-big secondary',
-														'type' : 'submit',
-														'name' : 'SignUp',
-														'value' : 'SignUp'
-													}).html('Sign Up');
-
-						}
-					}
-				});
-			}
-		}
-
-		function test(){
-			$.ajax({
-					url: '/api/find/folders',
-					method: 'post',
-					dataType: 'Json',
-					success: (data)=>{
-						for(let x of data){
-							console.log(x.original_name);
-							//console.log(data[x].original_name);
-						}
-					}
-				});
-		}
-	</script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
-
-<body onload="test()">
+<body>
 	<div class="header">
-		<br><img style="margin-left:20px; vertical-align:text-bottom;" id="img_cloud2" src="cloudy.jpg" alt="Cloud"><span style="font-size:24pt;";>Cloudy</span>
+		<br>
+		<img style="margin-left:20px; vertical-align:text-bottom;" id="img_cloud2" src="cloudy.jpg">
+		<span style="font-size:24pt;";>Cloudy</span>
 		<a href="index.html"><button type="submit" class="button button-small secondary" style="margin-left:1000px;" name="Login" value="Login">Log In</button></a>
 	</div>
 	<div class="register_form">
-		<p align="left"><span style="font-size:20pt;">Sign up. It's free!</span></p>
+		<p align="left">
+			<span style="font-size:20pt;">Sign up. It's free!</span>
+		</p>
 		<form name="registerForm">
 			<p><input id="field" type="text" name="username" placeholder="Enter your full name"></p>
 			<p><input id="field" type="email" name="email" placeholder="Enter your e-mail address"></p>
@@ -144,10 +33,7 @@
 		</form>
 		<button type="submit" class="button button-big primary" name="register" value="register" onclick="register()">Sign Up</button>
 	</div>
-
 	<div class="message"></div>
-
 	<div class="login_form"></div>
-
 </body>
 <html>

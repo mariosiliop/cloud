@@ -66,8 +66,8 @@ var register = {
           email: email
         });
 
-        data = {success: true};
-
+        data[0] = {success: true};
+        data[1] = {message: "Signed up!"};
      } else {
         console.log(req.valid_values + ' ' + req._exist);
         data[0] = {success: false};
